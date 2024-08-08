@@ -1,0 +1,1431 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "cache.db",
+      "cache_id": "my_profile2",
+      "store_fakeip": true
+    },
+    "clash_api": {
+      "external_ui": "ui",
+      "external_controller": "0.0.0.0:9090",
+      "external_ui_download_detour": "Proxy",
+      "default_mode": "rule"
+    }
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "google",
+        "address": "tls://8.8.8.8",
+        "detour": "Proxy"
+      },
+      {
+        "tag": "fallback",
+        "address": "8.8.8.8",
+        "address_resolver": "google",
+        "detour": "Proxy"
+      },
+      {
+        "tag": "local-dns",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      },
+      {
+        "tag": "block-dns",
+        "address": "rcode://success"
+      },
+      {
+        "tag": "Youtubedns",
+        "address": "8.8.8.8",
+        "detour": "Youtube"
+      },
+      {
+        "tag": "Telegramdns",
+        "address": "8.8.8.8",
+        "detour": "Telegram"
+      },
+      {
+        "tag": "Githubdns",
+        "address": "8.8.8.8",
+        "detour": "Github"
+      },
+      {
+        "tag": "Openaidns",
+        "address": "8.8.8.8",
+        "detour": "Openai"
+      },
+      {
+        "tag": "Netflixdns",
+        "address": "8.8.8.8",
+        "detour": "Netflix"
+      },
+      {
+        "tag": "Googledns",
+        "address": "8.8.8.8",
+        "detour": "Google"
+      },
+      {
+        "tag": "Directdns",
+        "address": "8.8.8.8",
+        "detour": "Direct"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "local-dns"
+      },
+      {
+        "rule_set": [
+          "Youtube0"
+        ],
+        "server": "Youtubedns"
+      },
+      {
+        "rule_set": [
+          "Telegram1"
+        ],
+        "server": "Telegramdns"
+      },
+      {
+        "rule_set": [
+          "Github0"
+        ],
+        "server": "Githubdns"
+      },
+      {
+        "rule_set": [
+          "Openai0"
+        ],
+        "server": "Openaidns"
+      },
+      {
+        "rule_set": [
+          "Netflix0"
+        ],
+        "server": "Netflixdns"
+      },
+      {
+        "rule_set": [
+          "Google0"
+        ],
+        "server": "Googledns"
+      },
+      {
+        "rule_set": [
+          "Direct1"
+        ],
+        "server": "local-dns"
+      },
+      {
+        "query_type": [
+          "A"
+        ],
+        "rewrite_ttl": 1,
+        "server": "fallback"
+      }
+    ],
+    "strategy": "ipv4_only"
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "::",
+      "listen_port": 8888,
+      "sniff": true
+    },
+    {
+      "type": "tun",
+      "inet4_address": "172.19.0.1/30",
+      "stack": "system",
+      "sniff": true,
+      "auto_route": true,
+      "strict_route": true,
+      "gso": false,
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 8888
+        }
+      }
+    }
+  ],
+  "route": {
+    "rule_set": [
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Youtube0",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/youtube.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Telegram0",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geoip/telegram.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Telegram1",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/telegram.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Github0",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/github.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Openai0",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/openai.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Netflix0",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/netflix.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Netflix1",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo-lite/geoip/netflix.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Google0",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/google.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Direct0",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geoip/cn.srs"
+      },
+      {
+        "type": "remote",
+        "format": "binary",
+        "download_detour": "Proxy",
+        "tag": "Direct1",
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/cn.srs"
+      }
+    ],
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 853
+          },
+          {
+            "network": "udp",
+            "port": 443
+          },
+          {
+            "protocol": "stun"
+          }
+        ],
+        "outbound": "block"
+      },
+      {
+        "rule_set": [
+          "Youtube0"
+        ],
+        "outbound": "Youtube"
+      },
+      {
+        "rule_set": [
+          "Telegram0",
+          "Telegram1"
+        ],
+        "outbound": "Telegram"
+      },
+      {
+        "rule_set": [
+          "Github0"
+        ],
+        "outbound": "Github"
+      },
+      {
+        "rule_set": [
+          "Openai0"
+        ],
+        "outbound": "Openai"
+      },
+      {
+        "rule_set": [
+          "Netflix0",
+          "Netflix1"
+        ],
+        "outbound": "Netflix"
+      },
+      {
+        "rule_set": [
+          "Google0"
+        ],
+        "outbound": "Google"
+      },
+      {
+        "rule_set": [
+          "Direct0",
+          "Direct1"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      }
+    ],
+    "auto_detect_interface": true,
+    "final": "Proxy"
+  },
+  "outbounds": [
+    {
+      "tag": "Proxy",
+      "outbounds": [
+        "全部",
+        "自动挡",
+        "🇭🇰 香港",
+        "🇯🇵 日本",
+        "🇺🇸 美国"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "Youtube",
+      "outbounds": [
+        "Proxy",
+        "全部",
+        "自动挡",
+        "🇭🇰 香港",
+        "🇯🇵 日本",
+        "🇺🇸 美国"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "Telegram",
+      "outbounds": [
+        "Proxy",
+        "全部",
+        "自动挡",
+        "🇭🇰 香港",
+        "🇯🇵 日本",
+        "🇺🇸 美国"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "Github",
+      "outbounds": [
+        "Proxy",
+        "全部",
+        "自动挡",
+        "🇭🇰 香港",
+        "🇯🇵 日本",
+        "🇺🇸 美国"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "Openai",
+      "outbounds": [
+        "Proxy",
+        "全部",
+        "自动挡",
+        "🇭🇰 香港",
+        "🇯🇵 日本",
+        "🇺🇸 美国"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "Netflix",
+      "outbounds": [
+        "Proxy",
+        "全部",
+        "自动挡",
+        "🇭🇰 香港",
+        "🇯🇵 日本",
+        "🇺🇸 美国"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "Google",
+      "outbounds": [
+        "Proxy",
+        "全部",
+        "自动挡",
+        "🇭🇰 香港",
+        "🇯🇵 日本",
+        "🇺🇸 美国"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "全部",
+      "outbounds": [
+        "Koyeb-US-由盒子提供",
+        "Koyeb-DE-由盒子提供",
+        "Back4app-US-由盒子提供",
+        "Glitch-US-由盒子提供",
+        "由盒子在互联网上收集",
+        "Cloudflare-Anycast",
+        "HK-Hong Kong Broadband Network",
+        "HK-45102-Alibaba",
+        "TW-Sky Digital Co.",
+        "SG-Tencent cloud computing",
+        "JP-Ztv Co.",
+        "KR-Oracle Cloud",
+        "US-Cluster Logic Inc",
+        "CN由盒子在互联网上收集_-1502312429",
+        "CN由盒子在互联网上收集_2046438778",
+        "CN由盒子在互联网上收集_-1509473673",
+        "CN由盒子在互联网上收集_466513589",
+        "CN由盒子在互联网上收集_505805535",
+        "CN由盒子在互联网上收集_-1459618184",
+        "CN由盒子在互联网上收集_1090576457",
+        "CN由盒子在互联网上收集_-1848921876",
+        "CN由盒子在互联网上收集_-2125474256",
+        "CN由盒子在互联网上收集_962560068",
+        "CA|由盒子在互联网上收集",
+        "CA|由盒子在互联网上收集 - 2",
+        "CA|由盒子在互联网上收集 - 2 - 3",
+        "CA|由盒子在互联网上收集 - 2 - 3 - 3",
+        "DE|由盒子在互联网上收集",
+        "DE|由盒子在互联网上收集 - 2",
+        "DE|由盒子在互联网上收集 - 2 - 3",
+        "FR|由盒子在互联网上收集",
+        "FR|由盒子在互联网上收集 - 2",
+        "FR|由盒子在互联网上收集 - 2 - 3",
+        "GB|由盒子在互联网上收集",
+        "GB|由盒子在互联网上收集 - 2",
+        "GB|由盒子在互联网上收集 - 2 - 3",
+        "GB|由盒子在互联网上收集 - 2 - 3 - 3",
+        "KR|由盒子在互联网上收集",
+        "KR|由盒子在互联网上收集 - 2",
+        "KR|由盒子在互联网上收集 - 2 - 3",
+        "KR|由盒子在互联网上收集 - 2 - 3 - 3",
+        "US|由盒子在互联网上收集",
+        "US|由盒子在互联网上收集 - 2",
+        "US|由盒子在互联网上收集 - 2 - 3",
+        "JP|由盒子在互联网上收集",
+        "JP|由盒子在互联网上收集 - 2",
+        "JP|由盒子在互联网上收集 - 2 - 3",
+        "JP|由盒子在互联网上收集 - 2 - 3 - 3",
+        "JP|由盒子在互联网上收集 - 2 - 3 - 3 - 3",
+        "SG|由盒子在互联网上收集",
+        "SG|由盒子在互联网上收集 - 2",
+        "SG|由盒子在互联网上收集 - 2 - 3",
+        "SG|由盒子在互联网上收集 - 2 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3 - 3"
+      ],
+      "interrupt_exist_connections": true,
+      "type": "selector"
+    },
+    {
+      "tag": "自动挡",
+      "outbounds": [
+        "Koyeb-US-由盒子提供",
+        "Koyeb-DE-由盒子提供",
+        "Back4app-US-由盒子提供",
+        "Glitch-US-由盒子提供",
+        "由盒子在互联网上收集",
+        "Cloudflare-Anycast",
+        "HK-Hong Kong Broadband Network",
+        "HK-45102-Alibaba",
+        "TW-Sky Digital Co.",
+        "SG-Tencent cloud computing",
+        "JP-Ztv Co.",
+        "KR-Oracle Cloud",
+        "US-Cluster Logic Inc",
+        "CN由盒子在互联网上收集_-1502312429",
+        "CN由盒子在互联网上收集_2046438778",
+        "CN由盒子在互联网上收集_-1509473673",
+        "CN由盒子在互联网上收集_466513589",
+        "CN由盒子在互联网上收集_505805535",
+        "CN由盒子在互联网上收集_-1459618184",
+        "CN由盒子在互联网上收集_1090576457",
+        "CN由盒子在互联网上收集_-1848921876",
+        "CN由盒子在互联网上收集_-2125474256",
+        "CN由盒子在互联网上收集_962560068",
+        "CA|由盒子在互联网上收集",
+        "CA|由盒子在互联网上收集 - 2",
+        "CA|由盒子在互联网上收集 - 2 - 3",
+        "CA|由盒子在互联网上收集 - 2 - 3 - 3",
+        "DE|由盒子在互联网上收集",
+        "DE|由盒子在互联网上收集 - 2",
+        "DE|由盒子在互联网上收集 - 2 - 3",
+        "FR|由盒子在互联网上收集",
+        "FR|由盒子在互联网上收集 - 2",
+        "FR|由盒子在互联网上收集 - 2 - 3",
+        "GB|由盒子在互联网上收集",
+        "GB|由盒子在互联网上收集 - 2",
+        "GB|由盒子在互联网上收集 - 2 - 3",
+        "GB|由盒子在互联网上收集 - 2 - 3 - 3",
+        "KR|由盒子在互联网上收集",
+        "KR|由盒子在互联网上收集 - 2",
+        "KR|由盒子在互联网上收集 - 2 - 3",
+        "KR|由盒子在互联网上收集 - 2 - 3 - 3",
+        "US|由盒子在互联网上收集",
+        "US|由盒子在互联网上收集 - 2",
+        "US|由盒子在互联网上收集 - 2 - 3",
+        "JP|由盒子在互联网上收集",
+        "JP|由盒子在互联网上收集 - 2",
+        "JP|由盒子在互联网上收集 - 2 - 3",
+        "JP|由盒子在互联网上收集 - 2 - 3 - 3",
+        "JP|由盒子在互联网上收集 - 2 - 3 - 3 - 3",
+        "SG|由盒子在互联网上收集",
+        "SG|由盒子在互联网上收集 - 2",
+        "SG|由盒子在互联网上收集 - 2 - 3",
+        "SG|由盒子在互联网上收集 - 2 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3 - 3"
+      ],
+      "type": "urltest",
+      "url": "https://www.gstatic.com/generate_204",
+      "tolerance": 50,
+      "interrupt_exist_connections": false
+    },
+    {
+      "tag": "🇭🇰 香港",
+      "outbounds": [
+        "HK-Hong Kong Broadband Network",
+        "HK-45102-Alibaba"
+      ],
+      "type": "urltest",
+      "url": "https://www.gstatic.com/generate_204",
+      "tolerance": 50,
+      "interrupt_exist_connections": false
+    },
+    {
+      "tag": "🇯🇵 日本",
+      "outbounds": [
+        "JP-Ztv Co.",
+        "JP|由盒子在互联网上收集",
+        "JP|由盒子在互联网上收集 - 2",
+        "JP|由盒子在互联网上收集 - 2 - 3",
+        "JP|由盒子在互联网上收集 - 2 - 3 - 3",
+        "JP|由盒子在互联网上收集 - 2 - 3 - 3 - 3"
+      ],
+      "type": "urltest",
+      "url": "https://www.gstatic.com/generate_204",
+      "tolerance": 50,
+      "interrupt_exist_connections": false
+    },
+    {
+      "tag": "🇺🇸 美国",
+      "outbounds": [
+        "Koyeb-US-由盒子提供",
+        "Back4app-US-由盒子提供",
+        "Glitch-US-由盒子提供",
+        "US-Cluster Logic Inc",
+        "US|由盒子在互联网上收集",
+        "US|由盒子在互联网上收集 - 2",
+        "US|由盒子在互联网上收集 - 2 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3",
+        "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3 - 3"
+      ],
+      "type": "urltest",
+      "url": "https://www.gstatic.com/generate_204",
+      "tolerance": 50,
+      "interrupt_exist_connections": false
+    },
+    {
+      "type": "direct",
+      "tag": "➜ Direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "tag": "Koyeb-US-由盒子提供",
+      "server": "na.ma",
+      "server_port": 443,
+      "type": "vmess",
+      "uuid": "00759fb3-bf4d-4b31-ac07-e77353592813",
+      "security": "auto",
+      "network": "tcp",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "tls"
+      },
+      "transport": {
+        "path": "/.cachefiles/89d86e07-f6a8-4aa9-9ba0-fafd2dc17300/",
+        "headers": {
+          "Host": "849aec73-0517-us.vps-jdkz.gq"
+        },
+        "type": "ws"
+      },
+      "alter_id": 0
+    },
+    {
+      "tag": "Koyeb-DE-由盒子提供",
+      "server": "na.ma",
+      "server_port": 443,
+      "type": "vmess",
+      "uuid": "00759fb3-bf4d-4b31-ac07-e77353592813",
+      "security": "auto",
+      "network": "tcp",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "tls"
+      },
+      "transport": {
+        "path": "/.cachefiles/89d86e07-f6a8-4aa9-9ba0-fafd2dc17300/",
+        "headers": {
+          "Host": "ec46ed00-d233-de.vps-jdkz.gq"
+        },
+        "type": "ws"
+      },
+      "alter_id": 0
+    },
+    {
+      "tag": "Back4app-US-由盒子提供",
+      "server": "na.ma",
+      "server_port": 443,
+      "type": "vless",
+      "uuid": "30efb85b-0c3b-41a4-a511-cff6f218e31f",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "back4app.vps-jdkz.gq"
+      },
+      "transport": {
+        "path": "/vless?ed=2048",
+        "headers": {
+          "Host": "back4app.vps-jdkz.gq"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "Glitch-US-由盒子提供",
+      "server": "na.ma",
+      "server_port": 443,
+      "type": "vless",
+      "uuid": "8eae54fc-e926-4cd1-9d67-ccbfcfde6c0d",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "glitch.8cc.free.hr"
+      },
+      "transport": {
+        "path": "/vless?ed=2048",
+        "headers": {
+          "Host": "glitch.8cc.free.hr"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "由盒子在互联网上收集",
+      "server": "edgetunnel-free.pages.dev",
+      "server_port": 443,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol",
+        "path": "/"
+      }
+    },
+    {
+      "tag": "Cloudflare-Anycast",
+      "server": "edgetunnel-free.pages.dev",
+      "server_port": 443,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol",
+        "path": "/"
+      }
+    },
+    {
+      "tag": "HK-Hong Kong Broadband Network",
+      "server": "119.247.186.144",
+      "server_port": 4434,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "path": "/?ed=2048",
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "HK-45102-Alibaba",
+      "server": "47.238.5.0",
+      "server_port": 2053,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "path": "/?ed=2048",
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "TW-Sky Digital Co.",
+      "server": "103.123.133.244",
+      "server_port": 18846,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "path": "/?ed=2048",
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "SG-Tencent cloud computing",
+      "server": "43.134.181.60",
+      "server_port": 53417,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "path": "/?ed=2048",
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "JP-Ztv Co.",
+      "server": "193.117.91.210",
+      "server_port": 10786,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "path": "/?ed=2048",
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "KR-Oracle Cloud",
+      "server": "152.70.245.66",
+      "server_port": 12693,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "path": "/?ed=2048",
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "US-Cluster Logic Inc",
+      "server": "98.142.143.20",
+      "server_port": 3000,
+      "type": "vless",
+      "uuid": "de44b044-8f90-4e18-b742-16591667ff96",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "edgetunnel-free.pages.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "path": "/?ed=2048",
+        "headers": {
+          "Host": "edgetunnel-free.pages.dev"
+        },
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_-1502312429",
+      "server": "120.232.153.40",
+      "server_port": 52442,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_2046438778",
+      "server": "183.236.48.161",
+      "server_port": 41490,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_-1509473673",
+      "server": "114.55.132.202",
+      "server_port": 50002,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_466513589",
+      "server": "120.237.79.157",
+      "server_port": 52908,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_505805535",
+      "server": "183.238.202.171",
+      "server_port": 42866,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_-1459618184",
+      "server": "183.238.202.171",
+      "server_port": 42866,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_1090576457",
+      "server": "120.232.153.37",
+      "server_port": 33414,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_-1848921876",
+      "server": "183.236.48.166",
+      "server_port": 54602,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_-2125474256",
+      "server": "120.210.205.82",
+      "server_port": 50002,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CN由盒子在互联网上收集_962560068",
+      "server": "183.238.90.3",
+      "server_port": 35576,
+      "type": "vmess",
+      "uuid": "418048af-a293-4b99-9b0c-98ca3580dd24",
+      "security": "auto",
+      "network": "tcp",
+      "alter_id": 64
+    },
+    {
+      "tag": "CA|由盒子在互联网上收集",
+      "server": "15.223.74.245",
+      "server_port": 16493,
+      "type": "trojan",
+      "password": "c82fdPYB4mJM",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "CA|由盒子在互联网上收集 - 2",
+      "server": "3.96.202.197",
+      "server_port": 16498,
+      "type": "trojan",
+      "password": "ZskvuVo8RiHx",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "CA|由盒子在互联网上收集 - 2 - 3",
+      "server": "35.183.108.47",
+      "server_port": 16509,
+      "type": "trojan",
+      "password": "qL9opbBVxFeA",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "CA|由盒子在互联网上收集 - 2 - 3 - 3",
+      "server": "3.96.189.71",
+      "server_port": 16522,
+      "type": "trojan",
+      "password": "6C86Oeh86a0y",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "DE|由盒子在互联网上收集",
+      "server": "3.67.6.26",
+      "server_port": 16494,
+      "type": "trojan",
+      "password": "ZEQ6QnwLsZWT",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "DE|由盒子在互联网上收集 - 2",
+      "server": "18.192.100.235",
+      "server_port": 16507,
+      "type": "trojan",
+      "password": "T7(ar(vO0zlW",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "DE|由盒子在互联网上收集 - 2 - 3",
+      "server": "18.194.20.14",
+      "server_port": 16487,
+      "type": "trojan",
+      "password": "P0VYv6PPOfEv",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "FR|由盒子在互联网上收集",
+      "server": "35.180.88.206",
+      "server_port": 16504,
+      "type": "trojan",
+      "password": "IbC13sUFGF)h",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "FR|由盒子在互联网上收集 - 2",
+      "server": "35.180.33.124",
+      "server_port": 16495,
+      "type": "trojan",
+      "password": "((kHrwelVHcf",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "FR|由盒子在互联网上收集 - 2 - 3",
+      "server": "15.236.225.133",
+      "server_port": 16509,
+      "type": "trojan",
+      "password": "Zsirnvmh03o9",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "GB|由盒子在互联网上收集",
+      "server": "18.130.16.247",
+      "server_port": 16521,
+      "type": "trojan",
+      "password": "rcP5sSqfqJZb",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "GB|由盒子在互联网上收集 - 2",
+      "server": "18.132.38.137",
+      "server_port": 16524,
+      "type": "trojan",
+      "password": "I6w958xu9uGT",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "GB|由盒子在互联网上收集 - 2 - 3",
+      "server": "3.10.224.101",
+      "server_port": 16514,
+      "type": "trojan",
+      "password": "EsRXs8Lnhm9m",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "GB|由盒子在互联网上收集 - 2 - 3 - 3",
+      "server": "13.40.47.33",
+      "server_port": 16521,
+      "type": "trojan",
+      "password": "l(LbCufNrp88",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "KR|由盒子在互联网上收集",
+      "server": "13.124.193.80",
+      "server_port": 16526,
+      "type": "trojan",
+      "password": "KLon1GmwiPbI",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "KR|由盒子在互联网上收集 - 2",
+      "server": "43.202.64.232",
+      "server_port": 16521,
+      "type": "trojan",
+      "password": "lk02kz)E3R2U",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "KR|由盒子在互联网上收集 - 2 - 3",
+      "server": "3.34.200.85",
+      "server_port": 16502,
+      "type": "trojan",
+      "password": "(HCJJ5eG9RS5",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "KR|由盒子在互联网上收集 - 2 - 3 - 3",
+      "server": "54.180.236.213",
+      "server_port": 16520,
+      "type": "trojan",
+      "password": "IewUe5vGm(Nv",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集",
+      "server": "3.82.232.69",
+      "server_port": 16486,
+      "type": "trojan",
+      "password": "jThBLnPD7)((",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集 - 2",
+      "server": "3.144.45.223",
+      "server_port": 16508,
+      "type": "trojan",
+      "password": "268L)j1hyBp0",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集 - 2 - 3",
+      "server": "18.227.46.111",
+      "server_port": 16512,
+      "type": "trojan",
+      "password": "7gNWWzdM0u5k",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "JP|由盒子在互联网上收集",
+      "server": "52.194.219.11",
+      "server_port": 16488,
+      "type": "trojan",
+      "password": "NdOnPlaAZ8y8",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "JP|由盒子在互联网上收集 - 2",
+      "server": "54.95.148.157",
+      "server_port": 16506,
+      "type": "trojan",
+      "password": "AxvllI8)Dpgh",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "JP|由盒子在互联网上收集 - 2 - 3",
+      "server": "13.114.104.253",
+      "server_port": 16490,
+      "type": "trojan",
+      "password": "CPIU(689J1hc",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "JP|由盒子在互联网上收集 - 2 - 3 - 3",
+      "server": "57.180.14.132",
+      "server_port": 16517,
+      "type": "trojan",
+      "password": "aU1Cja4PRgdH",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "JP|由盒子在互联网上收集 - 2 - 3 - 3 - 3",
+      "server": "18.179.9.130",
+      "server_port": 16515,
+      "type": "trojan",
+      "password": "49jqChRP)jX2",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "SG|由盒子在互联网上收集",
+      "server": "13.212.60.54",
+      "server_port": 16520,
+      "type": "trojan",
+      "password": "ojTOpPtd06Xn",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "SG|由盒子在互联网上收集 - 2",
+      "server": "18.143.139.85",
+      "server_port": 16500,
+      "type": "trojan",
+      "password": "6dgGGQlzvAQb",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "SG|由盒子在互联网上收集 - 2 - 3",
+      "server": "54.169.174.3",
+      "server_port": 16498,
+      "type": "trojan",
+      "password": "EFJhlezOi(K6",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "SG|由盒子在互联网上收集 - 2 - 3 - 3",
+      "server": "3.1.205.134",
+      "server_port": 16507,
+      "type": "trojan",
+      "password": "XUjuwPt(ZHhw",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集 - 2 - 3 - 3",
+      "server": "52.13.107.2",
+      "server_port": 16520,
+      "type": "trojan",
+      "password": "kmuMxXRuTB2g",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3",
+      "server": "54.218.250.43",
+      "server_port": 16528,
+      "type": "trojan",
+      "password": "J)mccVNGtgnu",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3",
+      "server": "34.221.179.36",
+      "server_port": 16491,
+      "type": "trojan",
+      "password": "1N0u)zzBZxld",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3",
+      "server": "52.26.144.139",
+      "server_port": 16511,
+      "type": "trojan",
+      "password": "r0MsxL20hzDx",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    },
+    {
+      "tag": "US|由盒子在互联网上收集 - 2 - 3 - 3 - 3 - 3 - 3 - 3",
+      "server": "35.89.16.39",
+      "server_port": 16507,
+      "type": "trojan",
+      "password": "(n7G1BDt1GB(",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "appsvs.shop"
+      }
+    }
+  ]
+}
